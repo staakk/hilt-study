@@ -1,0 +1,70 @@
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
+}
+
+android {
+    compileSdkVersion 30
+    buildToolsVersion "30.0.3"
+
+    defaultConfig {
+        applicationId "com.example.assistedinjection"
+        minSdkVersion 16
+        targetSdkVersion 30
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    buildFeatures {
+        viewBinding true
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+}
+
+dependencies {
+
+    //Kotlin
+    implementation kotlinCore
+
+    // Support
+    implementation support
+    implementation fragment
+
+    // ViewModels LiveData
+    implementation lifecycle.libs
+    kapt lifecycle.proc
+
+    // Dagger (Hilt)
+    implementation dagger.hiltAndroid
+    kapt dagger.hiltAndroidCompiler
+    androidTestImplementation dagger.hiltAndroidTest
+    kaptAndroidTest dagger.hiltAndroidCompiler
+
+    implementation coroutines.libs
+
+    // ViewModel
+    implementation viewmodel
+
+    // Timber
+    implementation utils.libs
+    kapt utils.libs
+
+    // Unit testing
+    testImplementation baseTest
+}
